@@ -16,6 +16,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <limits>
+#include <cmath>
 
 using namespace std;
 
@@ -43,11 +44,17 @@ const char OUI = 'o';
 
 int main() {
     char saisieContinuerProgramme;
+    int mois1 = 12;
+    int annee1 = 1990;
+    int mois2 = 5;
+    int annee2 = 2012;
    
    /* Boucle principale*/
    do
    {
-      
+      cout << jourSemaineDebut(mois1, annee1) << endl;
+      cout << jourSemaineDebut(mois2, annee2) << endl;
+      cout << "Dimanche = 0" << endl;
       
       
       cout << "Pressez sur la lettre \'o\' pour refaire un calendrier, "
@@ -107,8 +114,17 @@ bool estBissextile(int annee)
 
 /*
 Jour de semaine : si m >= 3, D = { [(23m)/9] + d + 4 + y + [y/4] - [y/100] + [y/400] - 2 } mod 7
-si m < 3, D = { [(23m)/9] + d + 4 + y + [z/4] - [z/100] + [z/400] } mod 7*/
+si m < 3, D = { [(23m)/9] + d + 4 + y + [z/4] - [z/100] + [z/400] } mod 7
+ */
 int jourSemaineDebut(int mois, int annee)
 {
-   
+   int anneeSpeciale = annee - 1;
+   if (mois >= 3)
+   {
+      return (int)(floor((23 * mois) / 9) + 1 + 4 + annee + floor(annee/4) - floor(annee/100) + floor(annee/400) - 2) % 7;
+   }
+   else
+   {
+      return (int)(floor((23 * mois) / 9) + 1 + 4 + annee + floor(anneeSpeciale/4) - floor(anneeSpeciale/100) + floor(anneeSpeciale/400)) % 7;
+   }
 }
