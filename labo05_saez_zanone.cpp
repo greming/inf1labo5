@@ -17,12 +17,13 @@
 #include <iostream>
 #include <limits>
 #include <cmath>
+#include <iomanip>
 
 using namespace std;
 
 void saisieUtilisateur();
 bool estBissextile(int annee);
-void afficheCalendrier(int debut, int fin);
+void afficheCalendrier(int moisDebut, int anneeDebut, int moisFin, int anneeFin);
 int jourSemaineDebut(int mois, int annee);
 
 enum class JOURS_DANS_MOIS_NON_BISS {JANVIER = 31, FEVRIER = 28, MARS = 31,
@@ -44,17 +45,11 @@ const char OUI = 'o';
 
 int main() {
     char saisieContinuerProgramme;
-    int mois1 = 12;
-    int annee1 = 1990;
-    int mois2 = 5;
-    int annee2 = 2012;
-   
+
    /* Boucle principale*/
    do
    {
-      cout << jourSemaineDebut(mois1, annee1) << endl;
-      cout << jourSemaineDebut(mois2, annee2) << endl;
-      cout << "Dimanche = 0" << endl;
+      afficheCalendrier(1,2015,1,2016);
       
       
       cout << "Pressez sur la lettre \'o\' pour refaire un calendrier, "
@@ -66,7 +61,6 @@ int main() {
    
    
  
-   
    return EXIT_SUCCESS;
 }
 
@@ -81,7 +75,7 @@ void saisieUtilisateur()
          cin.clear();
          cin.ignore(numeric_limits<streamsize>::max(), '\n');
    }
-   if ((moisDebut < MOIS_MINIMUM  or moisDebut < MOIS_MAXIMUM) and (anneeDebut 
+   if ((moisDebut > MOIS_MINIMUM  or moisDebut < MOIS_MAXIMUM) and (anneeDebut 
         < BORNE_ANNEE_MINIMALE or anneeDebut > BORNE_ANNEE_MAXIMALE) 
         and cin.fail() == false)
    {
@@ -96,7 +90,7 @@ void saisieUtilisateur()
          cin.clear();
          cin.ignore(numeric_limits<streamsize>::max(), '\n');
    }
-   if ((moisFin < MOIS_MINIMUM  or moisFin < MOIS_MAXIMUM) and (anneeFin 
+   if ((moisFin > MOIS_MINIMUM  or moisFin < MOIS_MAXIMUM) and (anneeFin 
         < BORNE_ANNEE_MINIMALE or anneeFin > BORNE_ANNEE_MAXIMALE) 
         and cin.fail() == false and (anneeFin >= anneeDebut and moisFin > moisDebut))
    {
@@ -121,10 +115,33 @@ int jourSemaineDebut(int mois, int annee)
    int anneeSpeciale = annee - 1;
    if (mois >= 3)
    {
-      return (int)(floor((23 * mois) / 9) + 1 + 4 + annee + floor(annee/4) - floor(annee/100) + floor(annee/400) - 2) % 7;
+      return (int)(floor((23 * mois) / 9) + 1 + 4 + annee + floor(annee/4) - 
+             floor(annee/100) + floor(annee/400) - 2) % 7;
    }
    else
    {
-      return (int)(floor((23 * mois) / 9) + 1 + 4 + annee + floor(anneeSpeciale/4) - floor(anneeSpeciale/100) + floor(anneeSpeciale/400)) % 7;
+      return (int)(floor((23 * mois) / 9) + 1 + 4 + annee + floor(anneeSpeciale/4) 
+             - floor(anneeSpeciale/100) + floor(anneeSpeciale/400)) % 7;
    }
+}
+
+
+void afficheCalendrier(int moisDebut, int anneeDebut, int moisFin, int anneeFin)
+{
+   int premierJourCalendrier = jourSemaineDebut(moisDebut,anneeDebut);
+   
+   
+   cout << setw(2) << "L" << setw(2) << "M" << setw(2) << "M" << setw(2) << "J" << setw(2) << "V" << setw(2)<< "S"<< setw(2) << "D"<< setw(2) << endl;
+   for(int i = 1; i <= 4; i++)
+   {
+      for(int j = 1; j <= 7; j ++)
+      {
+         cout << setw(2) << "X";
+      }
+      cout << endl;
+   }
+   /*for(int i = 1; i <= (int)(JOURS_DANS_MOIS_NON_BISS::JANVIER); i++)
+   {
+      cout << " " <<  i << " ";
+   }*/
 }
