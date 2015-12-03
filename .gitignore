@@ -1,0 +1,7 @@
+
+# Ignore everything
+*
+
+# But not these files...
+!labo05_saez_zanone.cpp
+!.gitignore
