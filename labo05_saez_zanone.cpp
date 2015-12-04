@@ -26,16 +26,8 @@ bool estBissextile(int annee);
 void afficheCalendrier(int moisDebut, int anneeDebut, int moisFin, int anneeFin);
 int jourSemaineDebut(int mois, int annee);
 
-enum class JOURS_DANS_MOIS_NON_BISS {JANVIER = 31, FEVRIER = 28, MARS = 31,
-                                     AVRIL = 30, MAI = 31, JUIN = 30,
-                                     JUILLET = 31, AOUT = 31, SEPTEMBRE = 30,
-                                     OCTOBRE = 31, NOVEMBRE = 30, DECEMBRE = 31};
-
-
-enum class JOURS_DANS_MOIS_BISS {JANVIER = 31, FEVRIER = 29, MARS = 31,
-                                 AVRIL = 30, MAI = 31, JUIN = 30,
-                                 JUILLET = 31, AOUT = 31, SEPTEMBRE = 30,
-                                 OCTOBRE = 31, NOVEMBRE = 30, DECEMBRE = 31};
+enum class MOIS {JANVIER = 1, FERVIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT,
+                 SEPTEMBRE, OCTOBRE, NOVEMBRE, DECEMBRE};
                                  
 const int MOIS_MAXIMUM = 12;
 const int MOIS_MINIMUM = 11;
@@ -129,19 +121,5 @@ int jourSemaineDebut(int mois, int annee)
 void afficheCalendrier(int moisDebut, int anneeDebut, int moisFin, int anneeFin)
 {
    int premierJourCalendrier = jourSemaineDebut(moisDebut,anneeDebut);
-   
-   
-   cout << setw(2) << "L" << setw(2) << "M" << setw(2) << "M" << setw(2) << "J" << setw(2) << "V" << setw(2)<< "S"<< setw(2) << "D"<< setw(2) << endl;
-   for(int i = 1; i <= 4; i++)
-   {
-      for(int j = 1; j <= 7; j ++)
-      {
-         cout << setw(2) << "X";
-      }
-      cout << endl;
-   }
-   /*for(int i = 1; i <= (int)(JOURS_DANS_MOIS_NON_BISS::JANVIER); i++)
-   {
-      cout << " " <<  i << " ";
-   }*/
+   for(int i = 0; i >= premierJourCalendrier;)
 }
